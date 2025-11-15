@@ -1,0 +1,79 @@
+name: "Test"
+
+# actions-up-ignore-file
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["**"]
+    paths:
+      - ".github/workflows/test.yaml"
+      - "dist/**"
+      - "src/**"
+      - "package*.json"
+      - "requirements*.txt"
+      - "action.yml"
+      - "Dockerfile"
+      - "pyproject.toml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v5
+
+      - name: "Debug event.json"
+        if: ${{ !github.event.act }}
+        continue-on-error: true
+        run: |
+          cat "${GITHUB_EVENT_PATH}"
+
+      - name: "Debug CTX github"
+        if: ${{ !github.event.act }}
+        continue-on-error: true
+        env:
+          GITHUB_CTX: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CTX"
+
+      - name: "Debug Environment"
+        if: ${{ !github.event.act }}
+        continue-on-error: true
+        run: |
+          env
+
+      - name: "Test Local Action"
+        id: test
+        uses: ./
+        with:
+          summary: ${{ !github.event.act }}
+          tag: "test"
+          #data: '{"key": "value"}'
+          data: |
+            status: broken
+            by: ralf
+
+      - name: "Validate Outputs"
+        if: ${{ !github.event.act }}
+        env:
+          sha: ${{ steps.test.outputs.sha }}
+        run: |
+          echo "sha: ${sha}"
+          if [ -z "${sha}" ];then
+            echo "No Output: sha"
+            exit 1
+          fi
+          echo "GITHUB_SHA: ${GITHUB_SHA}"
+          if [ "${sha}" != "${GITHUB_SHA}" ];then
+            echo "Invalid Output: sha"
+            exit 1
+          fi
