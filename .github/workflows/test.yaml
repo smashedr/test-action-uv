@@ -15,6 +15,7 @@ on:
       - "action.yml"
       - "Dockerfile"
       - "pyproject.toml"
+      - "uv.lock"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
