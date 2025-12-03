@@ -727,7 +727,6 @@ version = "0.0.1"
 source = { virtual = "." }
 dependencies = [
     { name = "actions-tools", extra = ["github"] },
-    { name = "tombi" },
 ]
 
 [package.dev-dependencies]
@@ -747,10 +746,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "actions-tools", extras = ["github"] },
-    { name = "tombi", specifier = ">=0.7.0" },
-]
+requires-dist = [{ name = "actions-tools", extras = ["github"] }]
 
 [package.metadata.requires-dev]
 dev = [
@@ -762,7 +758,7 @@ dev = [
     { name = "pygithub" },
     { name = "pyyaml" },
     { name = "ruff" },
-    { name = "tombi", specifier = ">=0.7.0" },
+    { name = "tombi" },
     { name = "ty" },
     { name = "types-pyyaml" },
     { name = "yamllint" },
