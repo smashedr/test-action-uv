@@ -4,21 +4,24 @@ name = "test-action-uv"
 version = "0.0.1"
 requires-python = ">=3.10"
 classifiers = ["Private :: Do Not Upload"]
-dependencies = ["actions-tools[github]"]
+dependencies = [
+  "actions-tools[github]",
+]
 
 [dependency-groups]
 dev = [
-    "bandit",
-    "black",
-    "flake8",
-    "isort",
-    "mypy",
-    "PyGitHub",
-    "pyyaml",
-    "ruff",
-    "yamllint",
-    "ty",
-    "types-PyYAML",
+  "PyGitHub",
+  "bandit",
+  "black",
+  "flake8",
+  "isort",
+  "mypy",
+  "pyyaml",
+  "ruff",
+  "tombi",
+  "ty",
+  "types-PyYAML",
+  "yamllint",
 ]
 
 # Bandit
@@ -49,7 +52,7 @@ skip = [".venv", ".github"]
 # Mypy
 # https://mypy.readthedocs.io/en/stable/config_file.html
 [tool.mypy]
-#ignore_missing_imports = true
+# ignore_missing_imports = true
 exclude = [".venv"]
 
 # Ruff

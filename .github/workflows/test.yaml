@@ -64,6 +64,6 @@ jobs:
       - name: "Validate Outputs"
         uses: cssnr/validate-outputs-action@master
         with:
-          outputs: ${{ toJSON(steps.pull.outputs) }}
+          outputs: ${{ toJSON(steps.test.outputs) }}
           data: |
             sha: ${{ github.sha }}
