@@ -48,17 +48,18 @@ jobs:
         run: |
           uv sync --locked --all-extras --dev
 
-      - name: "Debug"
+      - name: "Debug UV"
         if: ${{ !github.event.act }}
         continue-on-error: true
         run: |
-          uv run python -V
           uv python dir
-          echo "::group::uv pip list"
-          uv pip list
-          echo "::endgroup::"
+          uv python find
+          uv run python -V
           echo "::group::uv tree"
           uv tree
+          echo "::endgroup::"
+          echo "::group::uv pip list"
+          uv pip list
           echo "::endgroup::"
 
       - name: "astral-sh/ruff"
