@@ -40,9 +40,9 @@ jobs:
       - name: "Install UV"
         uses: astral-sh/setup-uv@v6
 
-      - name: "Install Python 3.13"
+      - name: "Install Python"
         run: |
-          uv python install 3.13
+          uv python install
 
       - name: "Install Project"
         run: |
@@ -105,13 +105,11 @@ jobs:
 
       - name: "yamllint"
         if: ${{ !cancelled() }}
-        env:
-          CONFIG: "{extends: relaxed, ignore: [node_modules/], rules: {line-length: {max: 119}}}"
         run: |
           echo "::group::List Files"
-          yamllint -d '${{ env.CONFIG }}' --list-files .
+          yamllint -c .github/yamllint.yaml --list-files .
           echo "::endgroup::"
-          yamllint -d '${{ env.CONFIG }}' .
+          yamllint -c .github/yamllint.yaml .
 
       - name: "actionlint"
         if: ${{ !cancelled() }}
