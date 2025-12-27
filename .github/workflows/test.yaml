@@ -5,7 +5,7 @@ name: "Test"
 on:
   workflow_dispatch:
   push:
-    branches: ["**"]
+    branches: [master]
     paths:
       - ".github/workflows/test.yaml"
       - "dist/**"
@@ -16,6 +16,7 @@ on:
       - "Dockerfile"
       - "pyproject.toml"
       - "uv.lock"
+  pull_request:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
