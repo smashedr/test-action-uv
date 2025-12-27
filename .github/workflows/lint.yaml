@@ -66,7 +66,7 @@ jobs:
 
       - name: "astral-sh/ruff"
         if: ${{ !cancelled() }}
-        uses: astral-sh/ruff-action@v3
+        uses: astral-sh/ruff-action@57714a7c8a2e59f32539362ba31877a1957dded1 # v3.5.1
         with:
           version: latest
 
@@ -113,13 +113,13 @@ jobs:
 
       - name: "actionlint"
         if: ${{ !cancelled() }}
-        uses: cssnr/actionlint-action@master
+        uses: cssnr/actionlint-action@v1
         with:
           shellcheck_opts: -e SC2012
 
       - name: "hadolint"
         if: ${{ !cancelled() }}
-        uses: hadolint/hadolint-action@v3.3.0
+        uses: hadolint/hadolint-action@2332a7b74a6de0dda2e2221d575162eba76ba5e5 # v3.3.0
         with:
           dockerfile: Dockerfile
 

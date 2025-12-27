@@ -62,7 +62,6 @@ select = ["E4", "E7", "E9", "F", "B", "Q"]
 # Scripts
 # https://github.com/cssnr/toml-run
 [tool.scripts]
-# Project
 build = "uv run hatch build"
 format = ["uv run black .", "uv run tombi format .", "uv run ruff format ."]
 lint = """
