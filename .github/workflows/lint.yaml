@@ -3,8 +3,14 @@ name: "Lint"
 on:
   workflow_dispatch:
   push:
-#    branches: [master]
-#  pull_request:
+    branches: [master]
+    paths-ignore: &paths
+      - ".gitattributes"
+      - ".gitignore"
+      - ".prettierignore"
+  pull_request:
+    branches: [master]
+    paths-ignore: *paths
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -26,39 +32,37 @@ jobs:
       - name: "Debug event.json"
         continue-on-error: true
         run: cat "${GITHUB_EVENT_PATH}"
-
       - name: "Debug CTX github"
         continue-on-error: true
         env:
           GITHUB_CTX: ${{ toJSON(github) }}
         run: echo "$GITHUB_CTX"
-
       - name: "Debug Environment"
         continue-on-error: true
         run: env
 
       - name: "Install UV"
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@681c641aba71e4a1c380be3ab5e12ad51f415867 # v7.1.6
 
-      - name: "Install Python 3.13"
+      - name: "Install Python"
         run: |
-          uv python install 3.13
+          uv python install
 
       - name: "Install Project"
         run: |
           uv sync --locked --all-extras --dev
 
-      - name: "Debug"
-        if: ${{ !github.event.act }}
+      - name: "Debug UV"
         continue-on-error: true
         run: |
-          uv run python -V
           uv python dir
-          echo "::group::uv pip list"
-          uv pip list
-          echo "::endgroup::"
+          uv python find
+          uv run python -V
           echo "::group::uv tree"
           uv tree
+          echo "::endgroup::"
+          echo "::group::uv pip list"
+          uv pip list
           echo "::endgroup::"
 
       - name: "astral-sh/ruff"
@@ -78,22 +82,27 @@ jobs:
 
       - name: "isort"
         if: ${{ !cancelled() }}
-        uses: isort/isort-action@v1
+        uses: isort/isort-action@24d8a7a51d33ca7f36c3f23598dafa33f7071326 # v1.1.1
 
       - name: "mypy"
         if: ${{ !cancelled() }}
         run: |
-          uv run mypy src
+          uvx toml-run mypy
 
       - name: "bandit"
         if: ${{ !cancelled() }}
         run: |
-          uv run bandit -c pyproject.toml -r src
+          uvx toml-run bandit
 
       - name: "tombi"
         if: ${{ !cancelled() }}
         run: |
           uv run tombi lint
+
+      - name: "yamllint"
+        if: ${{ !cancelled() }}
+        run: |
+          uvx toml-run yamllint
 
       - name: "prettier"
         if: ${{ !cancelled() }}
@@ -103,19 +112,11 @@ jobs:
           echo "::endgroup::"
           npx prettier --check .
 
-      - name: "yamllint"
-        if: ${{ !cancelled() }}
-        env:
-          CONFIG: "{extends: relaxed, ignore: [node_modules/], rules: {line-length: {max: 119}}}"
-        run: |
-          echo "::group::List Files"
-          yamllint -d '${{ env.CONFIG }}' --list-files .
-          echo "::endgroup::"
-          yamllint -d '${{ env.CONFIG }}' .
-
       - name: "actionlint"
         if: ${{ !cancelled() }}
         uses: cssnr/actionlint-action@master
+        with:
+          shellcheck_opts: -e SC2012
 
       - name: "hadolint"
         if: ${{ !cancelled() }}
@@ -131,11 +132,16 @@ jobs:
       #  with:
       #    scandir: src
 
-      #- name: "Vale"
+      #- name: "pytest"
       #  if: ${{ !cancelled() }}
-      #  uses: errata-ai/vale-action@v2.1.1
+      #  id: coverage
+      #  run: |
+      #    uv run coverage run -m pytest
+      #    uv run coverage xml
+      #    uv run coverage report -m
 
-      #- name: "SonarQube"
-      #  uses: SonarSource/sonarqube-scan-action@v4
-      #  env:
-      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #- name: "codecov"
+      #  if: ${{ !cancelled() && steps.coverage.outcome == 'success' }}
+      #  uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+      #  with:
+      #    token: ${{ secrets.CODECOV_TOKEN }}
