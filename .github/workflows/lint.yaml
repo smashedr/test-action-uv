@@ -4,13 +4,12 @@ on:
   workflow_dispatch:
   push:
     branches: [master]
-    paths-ignore: &paths
+    paths-ignore:
       - ".gitattributes"
       - ".gitignore"
       - ".prettierignore"
   pull_request:
     branches: [master]
-    paths-ignore: *paths
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
