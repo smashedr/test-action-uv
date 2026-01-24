@@ -1,9 +1,16 @@
 [![Actions Tools](https://img.shields.io/badge/python-actions_toolkit-4584b6?logo=python&logoColor=ffde57)](https://actions-tools.cssnr.com/)
-[![Test](https://img.shields.io/github/actions/workflow/status/smashedr/test-action-uv/test.yaml?logo=github&logoColor=white&label=test)](https://github.com/smashedr/test-action-uv/actions/workflows/test.yaml)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/smashedr/test-action-uv?logo=github&logoColor=white&label=updated)](https://github.com/smashedr/test-action-uv/graphs/commit-activity)
-[![GitHub Top Language](https://img.shields.io/github/languages/top/smashedr/test-action-uv?logo=htmx&logoColor=white)](https://github.com/smashedr/test-action-uv)
-[![GitHub Org Stars](https://img.shields.io/github/stars/cssnr?style=flat&logo=github&logoColor=white)](https://cssnr.github.io/)
+[![Workflow Test](https://img.shields.io/github/actions/workflow/status/smashedr/test-action-uv/test.yaml?logo=testcafe&logoColor=white&label=lint)](https://github.com/smashedr/test-action-uv/actions/workflows/lint.yaml)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/smashedr/test-action-uv?logo=listenhub&label=updated)](https://github.com/cssnr/test-action-uv/pulse)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/smashedr/test-action-uv?logo=buffer&label=repo%20size)](https://github.com/smashedr/test-action-uv?tab=readme-ov-file#readme)
+[![GitHub Top Language](https://img.shields.io/github/languages/top/smashedr/test-action-uv?logo=devbox)](https://github.com/smashedr/test-action-uv?tab=readme-ov-file#readme)
+[![GitHub Contributors](https://img.shields.io/github/contributors-anon/smashedr/test-action-uv?logo=southwestairlines)](https://github.com/smashedr/test-action-uv/graphs/contributors)
+[![GitHub Issues](https://img.shields.io/github/issues/smashedr/test-action-uv?logo=codeforces&logoColor=white)](https://github.com/smashedr/test-action-uv/issues)
+[![GitHub Discussions](https://img.shields.io/github/discussions/smashedr/test-action-uv?logo=theconversation)](https://github.com/smashedr/test-action-uv/discussions)
+[![GitHub Forks](https://img.shields.io/github/forks/smashedr/test-action-uv?style=flat&logo=forgejo&logoColor=white)](https://github.com/smashedr/test-action-uv/forks)
+[![GitHub Repo Stars](https://img.shields.io/github/stars/smashedr/test-action-uv?style=flat&logo=gleam&logoColor=white)](https://github.com/smashedr/test-action-uv/stargazers)
+[![GitHub Org Stars](https://img.shields.io/github/stars/cssnr?style=flat&logo=apachespark&logoColor=white&label=org%20stars)](https://cssnr.github.io/)
 [![Discord](https://img.shields.io/discord/899171661457293343?logo=discord&logoColor=white&label=discord&color=7289da)](https://discord.gg/wXy6m2X8wY)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-72a5f2?logo=kofi&label=support)](https://ko-fi.com/cssnr)
 
 # Test Action Python UV
 

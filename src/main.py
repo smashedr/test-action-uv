@@ -5,7 +5,6 @@ from github import GithubException
 
 import functions
 
-
 version: str = core.get_version()
 core.info(f"🏳️ Starting Test Action UV - \033[32;1m{version}")
 
