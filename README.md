@@ -28,6 +28,107 @@ For actions tools, see:
 - https://actions-tools.cssnr.com/
 - https://github.com/cssnr/actions-tools
 
+## Features
+
+This action creates or updates the provided `tag` to the `sha` has that triggered the workflow.
+
+This includes inputs, outputs, job summary, and automatic token authentication.
+
+## Inputs
+
+| Input       | Req. |    Default     | Input&nbsp;Description  |
+| :---------- | :--: | :------------: | :---------------------- |
+| **tag**     |  -   |     `test`     | Tag to Create or Update |
+| **data**    |  -   |       -        | Test Input Data         |
+| **summary** |  -   |     `true`     | Add Summary to Job      |
+| **token**   |  -   | `github.token` | Only for PAT            |
+
+```yaml
+- name: 'Test Action Python UV'
+  uses: smashedr/test-action-uv@master
+  with:
+    tag: test
+```
+
+### Permissions
+
+This action requires the following permissions:
+
+```yaml
+permissions:
+  contents: write
+```
+
+Permissions documentation for [Workflows](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token) and [Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication).
+
+## Outputs
+
+| Output  | Description |
+| :------ | :---------- |
+| **sha** | Tag Hash    |
+
+```yaml
+- name: 'Test Action Python UV'
+  id: test
+  uses: smashedr/test-action-uv@master
+  with:
+    tag: test
+
+- name: 'Echo Output'
+  run: |
+    echo "sha: '${{ steps.test.outputs.sha }}'"
+```
+
+## Examples
+
+💡 _Click on an example heading to expand or collapse the example._
+
+```yaml
+name: 'Test'
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  test:
+    name: 'Test'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v6
+
+      - name: 'Test Action Python UV'
+        id: test
+        uses: smashedr/test-action-uv@master
+
+      - name: 'Echo Outputs'
+        run: |
+          echo "sha: '${{ steps.test.outputs.sha }}'"
+```
+
+For more examples, you can check out other projects using this action:  
+https://github.com/smashedr/test-action-uv/network/dependents
+
+## Tags
+
+The following rolling [tags](https://github.com/smashedr/test-action-uv/tags) are maintained.
+
+| Version&nbsp;Tag                                                                                                                                                                                                   | Rolling | Bugs | Feat. |   Name    |  Target  | Example  |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----: | :--: | :---: | :-------: | :------: | :------- |
+| [![GitHub Tag Major](https://img.shields.io/github/v/tag/smashedr/test-action-uv?sort=semver&filter=!v*.*&style=for-the-badge&label=%20&color=44cc10)](https://github.com/smashedr/test-action-uv/releases/latest) |   ✅    |  ✅  |  ✅   | **Major** | `vN.x.x` | `vN`     |
+| [![GitHub Tag Minor](https://img.shields.io/github/v/tag/smashedr/test-action-uv?sort=semver&filter=!v*.*.*&style=for-the-badge&label=%20&color=blue)](https://github.com/smashedr/test-action-uv/releases/latest) |   ✅    |  ✅  |  ❌   | **Minor** | `vN.N.x` | `vN.N`   |
+| [![GitHub Release](https://img.shields.io/github/v/release/smashedr/test-action-uv?style=for-the-badge&label=%20&color=red)](https://github.com/smashedr/test-action-uv/releases/latest)                           |   ❌    |  ❌  |  ❌   | **Micro** | `vN.N.N` | `vN.N.N` |
+
+You can view the release notes for each version on the [releases](https://github.com/smashedr/test-action-uv/releases) page.
+
+The **Major** tag is recommended. It is the most up-to-date and always backwards compatible.
+Breaking changes would result in a **Major** version bump. At a minimum you should use a **Minor** tag.
+
 # Contributing
 
 If you would like to submit a PR, please review the [CONTRIBUTING.md](#contributing-ov-file).
@@ -48,6 +149,7 @@ Additionally, you can support other [GitHub Actions](https://actions.cssnr.com/)
 - [Rhysd Actionlint Action](https://github.com/cssnr/actionlint-action?tab=readme-ov-file#readme)
 - [Zensical Action](https://github.com/cssnr/zensical-action?tab=readme-ov-file#readme)
 - [VirusTotal Action](https://github.com/cssnr/virustotal-action?tab=readme-ov-file#readme)
+- [Homebrew Action](https://github.com/cssnr/homebrew-action?tab=readme-ov-file#readme)
 - [Mirror Repository Action](https://github.com/cssnr/mirror-repository-action?tab=readme-ov-file#readme)
 - [Update Version Tags Action](https://github.com/cssnr/update-version-tags-action?tab=readme-ov-file#readme)
 - [Docker Tags Action](https://github.com/cssnr/docker-tags-action?tab=readme-ov-file#readme)
@@ -61,6 +163,7 @@ Additionally, you can support other [GitHub Actions](https://actions.cssnr.com/)
 - [NPM Outdated Check Action](https://github.com/cssnr/npm-outdated-action?tab=readme-ov-file#readme)
 - [Label Creator Action](https://github.com/cssnr/label-creator-action?tab=readme-ov-file#readme)
 - [Algolia Crawler Action](https://github.com/cssnr/algolia-crawler-action?tab=readme-ov-file#readme)
+- [Create Pull Action](https://github.com/cssnr/create-pull-action?tab=readme-ov-file#readme)
 - [Upload Release Action](https://github.com/cssnr/upload-release-action?tab=readme-ov-file#readme)
 - [Check Build Action](https://github.com/cssnr/check-build-action?tab=readme-ov-file#readme)
 - [Web Request Action](https://github.com/cssnr/web-request-action?tab=readme-ov-file#readme)

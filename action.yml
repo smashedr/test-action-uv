@@ -1,4 +1,4 @@
-name: "Test Action UV"
+name: "Test Action Python UV"
 description: "Test UV Python Action using astral-sh/uv."
 author: "Shane"
 branding:

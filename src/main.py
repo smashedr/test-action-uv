@@ -6,7 +6,7 @@ from github import GithubException
 import functions
 
 version: str = core.get_version()
-core.info(f"🏳️ Starting Test Action UV - \033[32;1m{version}")
+core.info(f"🏳️ Starting Test Action Python UV - \033[32;1m{version}")
 
 
 # Inputs
@@ -106,7 +106,7 @@ if summary:
         inputs_table.append(f"<tr><td>{x}</td><td>{value or '-'}</td></tr>")
     inputs_table.append("</table>")
 
-    core.summary("### Test Action UV")
+    core.summary("### Test Action Python UV")
     core.summary(f"{result}: [{ref.ref}]({html_url}/releases/tag/{tag}) ➡️ `{context.sha}`")
     core.summary(f"<details><summary>Inputs</summary>{''.join(inputs_table)}</details>\n")
     core.summary(f"[Report an issue or request a feature]({html_url}/issues)")

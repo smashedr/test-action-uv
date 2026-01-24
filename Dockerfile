@@ -1,7 +1,7 @@
 FROM ghcr.io/astral-sh/uv:python3.13-alpine
 
 LABEL org.opencontainers.image.source="https://github.com/smashedr/test-action-uv"
-LABEL org.opencontainers.image.description="Test Action UV"
+LABEL org.opencontainers.image.description="Test Action Python UV"
 LABEL org.opencontainers.image.authors="smashedr"
 
 # Enable bytecode compilation
